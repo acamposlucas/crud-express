@@ -27,4 +27,20 @@ module.exports = {
 			);
 		});
 	},
+
+	insert: (model, license_plate) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`INSERT INTO cars (model, license_plate) VALUES (?, ?)`,
+				[model, license_plate],
+				(error, results) => {
+					if (error) {
+						reject(error);
+						return;
+					}
+					resolve(results.insertId);
+				}
+			);
+		});
+	},
 };

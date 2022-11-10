@@ -35,4 +35,26 @@ module.exports = {
 
 		res.json(data);
 	},
+
+	insert: async (req, res) => {
+		let data = {
+			error: "",
+			result: {},
+		};
+
+		const { model, license_plate } = req.body;
+
+		if (model && license_plate) {
+			let carId = await CarService.insert(model, license_plate);
+			data.result = {
+				id: carId,
+				model,
+				license_plate,
+			};
+		} else {
+			data.error = "Campos não enviados";
+		}
+
+		res.json(data);
+	},
 };
