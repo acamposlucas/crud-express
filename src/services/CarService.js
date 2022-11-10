@@ -43,4 +43,20 @@ module.exports = {
 			);
 		});
 	},
+
+	update: (id, model, license_plate) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`UPDATE cars SET model = ?, license_plate = ? WHERE id = ?`,
+				[model, license_plate, id],
+				(error, results) => {
+					if (error) {
+						reject(error);
+						return;
+					}
+					resolve(results);
+				}
+			);
+		});
+	},
 };

@@ -57,4 +57,27 @@ module.exports = {
 
 		res.json(data);
 	},
+
+	update: async (req, res) => {
+		let data = {
+			error: "",
+			result: {},
+		};
+
+		const id = req.params.id;
+		const { model, license_plate } = req.body;
+
+		if (id && model && license_plate) {
+			await CarService.update(id, model, license_plate);
+			data.result = {
+				id,
+				model,
+				license_plate,
+			};
+		} else {
+			data.error = "Campos inválidos";
+		}
+
+		res.json(data);
+	},
 };
