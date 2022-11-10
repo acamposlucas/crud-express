@@ -80,4 +80,15 @@ module.exports = {
 
 		res.json(data);
 	},
+
+	delete: async (req, res) => {
+		let data = {
+			error: "",
+			result: {},
+		};
+
+		await CarService.delete(req.params.id);
+
+		res.json(data);
+	},
 };
